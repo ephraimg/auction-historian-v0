@@ -1,10 +1,14 @@
+require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
 var items = require('../database-mongo');
+var sampleData = require('./ebayHelpers');
 
 var app = express();
 
 app.use(express.static(__dirname + '/../react-client/dist'));
+
+app.get('/', () => res.render('index'));
 
 app.get('/items', function (req, res) {
   items.selectAll(function(err, data) {
@@ -16,7 +20,10 @@ app.get('/items', function (req, res) {
   });
 });
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+// You must specify your AppID in the X-EBAY-SOA-SECURITY-APPNAME HTTP header 
+// (or SECURITY-APPNAME URL parameter) of every request.
+
+app.listen(process.env.PORT, function() {
+  console.log(`listening on port ${process.env.PORT}!`); 
 });
 
