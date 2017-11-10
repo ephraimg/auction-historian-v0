@@ -19,26 +19,44 @@ Once the project moves into development, the press release can be used as a touc
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
 
+  Auction Historian
+
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+
+  With this product, ebay users can improve their abilities to spot great deals.
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
 
+  The application will allow the user to search ebay listing and save the results they're interested in. Basic information about the listings will be available even after the listings have been deleted from ebay. This lets users search through their saved listings to compare past final sale prices to the prices of similar current auctions.
+
 ## Problem ##
   > Describe the problem your product solves.
+
+  On ebay, listings are deleted shortly after ending. This prevents the user from seeing what prices items have tended to sell for. Auction Historian solves this problem.
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
 
+  With a simple user interface and permanent storage, users can easily search and save their search results.
+
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+
+  Auction Historian is a fantastic new tool that will let ebay users find what they want and get the best possible deals.
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
 
+  Getting started with Auction Historian is as easy as visiting our website [URL HERE] and entering your fist search.
+
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
 
+  Auction Historian let me keep track of lots of past auction results and search through them easily. This let me tell when a current auction was a good deal or not, so I've saved tons of money thanks to this app! 
+
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+
+  To check out Auction Historian, visit our webpage and try it out.
