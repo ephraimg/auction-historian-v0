@@ -27,19 +27,19 @@ class App extends React.Component {
   }
 
   handleSaveClick(auction) {
-    // $.ajax({
-    //   type: 'POST',      
-    //   url: '/auctions',
-    //   contentType: 'application/json',
-    //   data: auction,
-    //   success: (data) => {
-    //     console.log(data)
-    //   },
-    //   error: (err) => {
-    //     console.log('err', err);
-    //   }
-    // });    
-    console.log(auction);
+    var jsonData = JSON.stringify(auction);
+    $.ajax({
+      type: 'POST',      
+      url: '/auctions',
+      contentType: 'application/json',
+      data: jsonData,
+      success: (data) => {
+        console.log('Sent POST to /auctions with body:\n', auction);
+      },
+      error: (err) => {
+        console.log('Error sending POST to /auctions:\n', err);
+      }
+    });    
   }
   
   render () {

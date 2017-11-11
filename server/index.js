@@ -7,11 +7,12 @@ var sampleData = require('./ebayHelpers');
 var app = express();
 
 app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(bodyParser.json({strict: false}));
 
 app.get('/', () => res.render('index'));
 
-app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
+app.get('/auctions', (req, res) => {
+  items.selectAll((err, data) => {
     if(err) {
       res.sendStatus(500);
     } else {
@@ -19,6 +20,11 @@ app.get('/items', function (req, res) {
     }
   });
 });
+
+app.post('/auctions', (req, res) => {
+  console.log('POST received to /auctions with body: \n', req.body);
+  res.status(201).send();
+})
 
 // You must specify your AppID in the X-EBAY-SOA-SECURITY-APPNAME HTTP header 
 // (or SECURITY-APPNAME URL parameter) of every request.

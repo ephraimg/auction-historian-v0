@@ -23,11 +23,12 @@ var auctionSchema = mongoose.Schema({
   endTime: Date 
 });
 var Auction = mongoose.model('Auction', auctionSchema);
-Auction.schema.options.emitIndexErrors; // true
-Auction.on('error', function(error) {
-  console.log('Mongoose index error!');
-});
 
+/* Uncomment below to see errors, e.g. dup indexes */
+// Auction.schema.options.emitIndexErrors;
+// Auction.on('error', function(error) {
+//   console.log('Mongoose index error... ', error);
+// });
 
 var selectAll = function(callback) {
   Auction.find({}, function(err, items) {
@@ -39,6 +40,7 @@ var selectAll = function(callback) {
   });
 };
 
+// sample save for testing
 var saveAuction = ebayItem => {
   var currentPrice = Number(ebayItem.sellingStatus[0].currentPrice[0]["__value__"]);
   var currencyId = ebayItem.sellingStatus[0].currentPrice[0]["@currencyId"]
