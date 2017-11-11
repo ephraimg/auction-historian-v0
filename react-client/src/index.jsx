@@ -34,7 +34,7 @@ class App extends React.Component {
       contentType: 'application/json',
       data: jsonData,
       success: (data) => {
-        console.log('Sent POST to /auctions with body:\n', auction);
+        console.log('Sent POST to /auctions');
       },
       error: (err) => {
         console.log('Error sending POST to /auctions:\n', err);

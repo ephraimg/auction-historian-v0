@@ -1,7 +1,7 @@
 require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
-var items = require('../database-mongo');
+var db = require('../database-mongo/index');
 var sampleData = require('./ebayHelpers');
 
 var app = express();
@@ -22,7 +22,7 @@ app.get('/auctions', (req, res) => {
 });
 
 app.post('/auctions', (req, res) => {
-  console.log('POST received to /auctions with body: \n', req.body);
+  db.saveAuction(req.body);
   res.status(201).send();
 })
 

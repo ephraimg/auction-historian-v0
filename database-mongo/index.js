@@ -1,4 +1,6 @@
 require('dotenv').config();
+var fs = require('fs');
+var request = require('request');
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI);
 
@@ -17,6 +19,7 @@ var auctionSchema = mongoose.Schema({
   title: String,
   categoryId: String,
   galleryURL: String,
+  localImage: String,
   viewItemURL: String,
   currentPrice: Number,
   currencyId: String,
@@ -42,6 +45,7 @@ var selectAll = function(callback) {
 
 // sample save for testing
 var saveAuction = ebayItem => {
+  var localImagePath = './database-mongo/local-gallery/' + ebayItem.itemId[0] + '.jpg';
   var currentPrice = Number(ebayItem.sellingStatus[0].currentPrice[0]["__value__"]);
   var currencyId = ebayItem.sellingStatus[0].currentPrice[0]["@currencyId"]
   var endTime = new Date(ebayItem.listingInfo[0].endTime);
@@ -51,13 +55,16 @@ var saveAuction = ebayItem => {
     categoryId: ebayItem.primaryCategory[0].categoryId[0],
     categoryName: ebayItem.primaryCategory[0].categoryName[0],
     galleryURL: ebayItem.galleryURL[0],
+    localImage: localImagePath,
     viewItemURL: ebayItem.viewItemURL[0],
     currentPrice: currentPrice,
     currencyId: currencyId,
     endTime: endTime
   })
   newAuction.save();
-}
+  request(ebayItem.galleryURL[0]).pipe(fs.createWriteStream(localImagePath));
+};
+
 
 saveAuction({
   "itemId":["201847213077"],

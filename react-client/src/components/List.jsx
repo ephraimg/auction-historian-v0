@@ -12,11 +12,11 @@ class List extends React.Component {
   }
   
   componentDidUpdate() {
-    console.log('Update: ', JSON.stringify(this.state.savedAuctions))    
+
   }
   
   addToSaved(itemId) {
-    console.log('Saved auctions: ', JSON.stringify(this.state.savedAuctions));
+    console.log('Saved auction!');
     var newItem = {};
     newItem[itemId] = true;        
     var newSaved = $.extend({}, this.state.savedAuctions, newItem);
