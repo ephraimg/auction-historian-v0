@@ -45,7 +45,7 @@ var selectAll = function(callback) {
 
 // sample save for testing
 var saveAuction = ebayItem => {
-  var localImagePath = './database-mongo/local-gallery/' + ebayItem.itemId[0] + '.jpg';
+  var localImagePath = './react-client/dist/local-gallery/' + ebayItem.itemId[0] + '.jpg';
   var currentPrice = Number(ebayItem.sellingStatus[0].currentPrice[0]["__value__"]);
   var currencyId = ebayItem.sellingStatus[0].currentPrice[0]["@currencyId"]
   var endTime = new Date(ebayItem.listingInfo[0].endTime);
