@@ -1,4 +1,5 @@
 require('dotenv').config();
+var Promise = require('bluebird');
 var express = require('express');
 var bodyParser = require('body-parser');
 var db = require('../database-mongo/index');
@@ -12,12 +13,22 @@ app.use(bodyParser.json({strict: false}));
 app.get('/', () => res.render('index'));
 
 app.get('/auctions', (req, res) => {
-  items.selectAll((err, data) => {
-    if(err) {
-      res.sendStatus(500);
-    } else {
-      res.json(data);
-    }
+  Promise.all([
+    db.Auction.find({})
+      .lean(true)
+      .limit(10)
+      .exec(),
+    db.Auction.find({})
+      .select('itemId')
+      .lean(true)
+      .exec()
+  ])
+  .then(results => {
+    console.log('================>\n', results, '\n<===============');
+    res.status(200).send(results);
+  })
+  .catch(err => {
+    res.sendStatus(500);
   });
 });
 

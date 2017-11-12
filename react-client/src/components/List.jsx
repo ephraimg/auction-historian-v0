@@ -1,45 +1,36 @@
 import React from 'react';
-import $ from 'jquery';
 import ListItem from './ListItem.jsx';
 
-class List extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      savedAuctions: {}
-    };
-    this.addToSaved = this.addToSaved.bind(this);
-  }
-  
-  componentDidUpdate() {
+const List = props => {
+  return (<div>
 
-  }
-  
-  addToSaved(itemId) {
-    console.log('Saved auction!');
-    var newItem = {};
-    newItem[itemId] = true;        
-    var newSaved = $.extend({}, this.state.savedAuctions, newItem);
-    this.setState({
-      savedAuctions: newSaved
-    }); 
-  }
 
-  render() {
-    return (<div>
-      <h4> List Component </h4>
-      There are { this.props.auctions.length } auctions.
-      { this.props.auctions.map(auction => 
-        <ListItem 
-          auction={auction}
-          savedList={this.state.savedAuctions} 
-          handleSaveClick={this.props.handleSaveClick}
-          addToSaved={this.addToSaved} 
-        />
-      )}
-    </div>)
-  }
-   
+        <div className="tabs cf" >
+          <div className="tab">View live <br/> auctions</div>
+          <div className="tab">View saved <br/> auctions</div>
+          <div style={{float: "right"}}>
+            <div><input className="search-field"></input></div>
+            <div style={{float: "right"}} className="search-button"> Search </div>
+          </div>
+        </div>
+        <div>
+          There are {props.auctions.length} auctions.
+        </div>
+
+
+      <div>
+        {props.auctions.map(auction => {
+          return (<ListItem 
+            key={auction.itemId}
+            isSaved={!!props.savedAuctions[auction.itemId]} 
+            auction={auction}
+            handleSaveClick={props.handleSaveClick}
+          />)}
+        )}
+      </div>
+
+    </div>
+  )
 }
 
 export default List;
