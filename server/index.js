@@ -24,10 +24,15 @@ app.get('/auctions', (req, res) => {
       .exec()
   ])
   .then(results => {
-    console.log('================>\n', results, '\n<===============');
+    console.log(`================>\n 
+      server index 27: got ${results.length} results from db 
+      \n<===============`);
     res.status(200).send(results);
   })
   .catch(err => {
+    console.log(`================>\n 
+      server index 31: error getting results from db 
+      \n<===============`);
     res.sendStatus(500);
   });
 });
@@ -38,8 +43,13 @@ app.post('/auctions', (req, res) => {
 });
 
 app.post('/search', (req, res) => {
-  // ebay.search(req.body, results => res.send(results));
-  res.send('hello');
+  console.log('\n\nreq.body is: \n', req.body);
+  ebay.search(req.body)
+    .then(results => res.status(200).send(results))
+    .catch(err => {
+      console.log('Error searching: ', err);
+      res.status(200).send('Error searching: ', err);
+    })
 });
 
 // You must specify your AppID in the X-EBAY-SOA-SECURITY-APPNAME HTTP header 

@@ -29,26 +29,6 @@ class App extends React.Component {
     });
   }
 
-  handleSaveClick(auction) {
-    var jsonData = JSON.stringify(auction);
-    $.ajax({
-      url: '/auctions', 
-      success: auctions => {
-        var newSavedAuctions = {};
-        auctions[1].forEach(el => {
-          newSavedAuctions[el.itemId] = true;
-        });
-        this.setState({
-          auctions: auctions[0],
-          savedAuctions: newSavedAuctions
-        })
-      },
-      error: err => {
-        console.log('err', err);
-      }
-    });    
-  }
-
   addToSaved(auction) {
     console.log('Saved auction!');
     var newItem = {};

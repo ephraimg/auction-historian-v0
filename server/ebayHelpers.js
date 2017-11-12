@@ -1,36 +1,39 @@
 require('dotenv').config();
+var request = require('request');
 
-var search = (query, callback) => {
 
-    // make *request* here
-
-    // $.ajax({
-    //   type: 'POST',
-    //   url: 'http://svcs.ebay.com/services/search/FindingService/v1',
-    //   headers: {
-    //     'X-EBAY-SOA-SECURITY-APPNAME': process.env.EBAY_APP_ID,
-    //     'X-EBAY-SOA-OPERATION-NAME': 'findItemsAdvanced',
-    //     'X-EBAY-SOA-REQUEST-DATA-FORMAT': 'json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   data: {
-    //     categoryId: "176985", // Music > Records (leaf)
-    //     keywords: query,
-    //     paginationInput: {
-    //       entriesPerPage: "20"
-    //     }
-    //   },
-    //   processData: false,
-    //   success: (data) => {
-    //     // var refined = this.refineData(data);
-    //     // console.log(refined);
-    //     callback(data);
-    //   },
-    //   error: (err) => {
-    //     callback('err', err);
-    //   }
-    // });
+var search = (query) => {
+    var options = {
+        method: 'POST',
+        uri: 'http://svcs.ebay.com/services/search/FindingService/v1',
+        headers: {
+            'X-EBAY-SOA-SECURITY-APPNAME': process.env.EBAY_APP_ID,
+            'X-EBAY-SOA-OPERATION-NAME': 'findItemsAdvanced',
+            'X-EBAY-SOA-REQUEST-DATA-FORMAT': 'JSON'
+        },
+        body: {
+            categoryId: "176985", // 176985 is Music > Records (leaf)
+            keywords: query,
+            paginationInput: {
+              entriesPerPage: "2"
+            }
+        },
+        json: true
+    };
+    return new Promise((resolve, reject) => {
+        return request(options, (err, res, body) => {
+          if (err) {
+            console.log(`ebayHelpers 27: error searching.\n${err}`);
+            reject(err);
+          } else {
+            console.log(`ebayHelpers 30: request yielded body:\n${JSON.stringify(body)}`);
+            console.log(`ebayHelpers 30: request yielded res:\n${JSON.stringify(res)}`);    
+            resolve(body);
+          }
+        });
+      });      
 };
+
 
 var refineData = rawAuctions => {
     var refinedAuctions = [];
@@ -38,7 +41,7 @@ var refineData = rawAuctions => {
         ? rawAuctions.findItemsAdvancedResponse[0].searchResult[0].item
         : rawAuctions;
     // console.log(rawAuctions, '\n\n', rawAuctions.findItemsAdvancedResponse.item);
-    console.log(auctionsToRefine);
+    // console.log(auctionsToRefine);
 
     auctionsToRefine.forEach(ebayItem => {
         var currentPrice = Number(ebayItem.sellingStatus[0].currentPrice[0]["__value__"]);

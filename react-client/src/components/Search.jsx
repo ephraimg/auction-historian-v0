@@ -19,24 +19,21 @@ class Search extends React.Component {
 
   handleClick() {
     console.log('Searched ', this.state.searchText);
-    var query = this.state.searchText;
-
+    var query = JSON.stringify(this.state.searchText);
     // send search req to server, wait for response
     $.ajax({
       type: 'POST',
       url: '/search',
-      data: {
-        query
-      },
-      ContentType: 'application/json',
+      contentType: 'application/json',
+      data: query,
       processData: false,
       success: (data) => {
         // var refined = this.refineData(data);
         // console.log(refined);
-        console.log(data);
+        console.log('search.jsx 36: got data');
       },
       error: (err) => {
-        console.log('err', err);
+        console.log('search.jsx 38: err', err);
       }
     });
   }
