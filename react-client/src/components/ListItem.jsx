@@ -12,9 +12,12 @@ var ListItem = props => {
     color: "black"  
   };
   
+    // need to fix this and reinsert...
+  //       <img className="auction-img" src={props.auction.localImage}/>
+
   if (props.isSaved) { 
     return (<div className="auction-item cf">
-      <img className="auction-img" src={props.auction.localImage}/>
+      <img className="auction-img" src={props.auction.galleryURL}/>      
       <div className="auction-info"> 
         <div className="save-button" 
             style={savedStyle}> Saved!

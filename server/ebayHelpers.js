@@ -15,7 +15,7 @@ var search = (query) => {
             categoryId: "176985", // 176985 is Music > Records (leaf)
             keywords: query,
             paginationInput: {
-              entriesPerPage: "2"
+              entriesPerPage: "20"
             }
         },
         json: true

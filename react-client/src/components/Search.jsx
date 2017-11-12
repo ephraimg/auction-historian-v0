@@ -14,7 +14,7 @@ class Search extends React.Component {
   handleChange(e) {
     this.setState({
       searchText: e.target.value
-    }, () => console.log(this.state.searchText));
+    });
   }
 
   handleClick() {
@@ -31,6 +31,7 @@ class Search extends React.Component {
         // var refined = this.refineData(data);
         // console.log(refined);
         console.log('search.jsx 36: got data');
+        this.props.updateDisplayedAuctions(data);
       },
       error: (err) => {
         console.log('search.jsx 38: err', err);
@@ -50,7 +51,7 @@ class Search extends React.Component {
         className="search-button"
         onClick={this.handleClick}
       > 
-        Search </div>
+        Search ebay auctions</div>
       </div>)
   }
 

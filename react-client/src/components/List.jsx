@@ -7,14 +7,17 @@ const List = props => {
   return (<div>
 
       <div className="tabs cf" >
-        <div className="tab">View live <br/> auctions</div>
-        <div className="tab">View saved <br/> auctions</div>
+        <div className="tab" 
+            onClick={props.getSavedAuctions}
+        >Show saved <br/> auctions</div>
         <div style={{float: "right"}}>
-          <Search />
+          <Search 
+            updateDisplayedAuctions={props.updateDisplayedAuctions}
+          />
         </div>
       </div>
       <div>
-        There are {props.auctions.length} auctions.
+        You have {Object.keys(props.savedAuctions).length} saved auctions.
       </div>
 
       <div>

@@ -7,20 +7,38 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
+      loadedAuctions: [],
       auctions: [],
       savedAuctions: {}
     }
     this.handleSaveClick = this.handleSaveClick.bind(this);
     this.addToSaved = this.addToSaved.bind(this);
+    this.updateDisplayedAuctions = this.updateDisplayedAuctions.bind(this);
+    this.getSavedAuctions = this.getSavedAuctions.bind(this);
+  }
+
+  updateDisplayedAuctions(auctions) {
+    // console.log('update func auctions: ', auctions);
+    this.setState({auctions: auctions});
   }
 
   componentDidMount() {
+    this.getSavedAuctions();
+  }
+
+  getSavedAuctions() {
     $.ajax({
       url: '/auctions', 
       success: (auction10andAll) => {
+        var recent10Auctions = auction10andAll[0];
+        var allSavedAuctionIds = {};
+        auction10andAll[1].forEach(auction => {
+          allSavedAuctionIds[auction.itemId] = true;
+        });
         this.setState({
-          auctions: auction10andAll[0],
-          savedAuctions: auction10andAll[1]
+          auctions: recent10Auctions,
+          loadedAuctions: recent10Auctions,
+          savedAuctions: allSavedAuctionIds
         })
       },
       error: (err) => {
@@ -46,6 +64,7 @@ class App extends React.Component {
       url: '/auctions',
       contentType: 'application/json',
       data: jsonData,
+      processData: false,
       success: (data) => {
         console.log('Sent POST to /auctions');
         this.addToSaved(auction);
@@ -60,8 +79,11 @@ class App extends React.Component {
     return (<div>
       <h1>Auction Historian</h1>
       <List auctions={this.state.auctions} 
+            loadedAuctions={this.state.loadedAuctions}
             savedAuctions={this.state.savedAuctions}  
-            handleSaveClick={this.handleSaveClick}/>
+            getSavedAuctions={this.getSavedAuctions}
+            handleSaveClick={this.handleSaveClick}
+            updateDisplayedAuctions={this.updateDisplayedAuctions}/>
     </div>)
   }
 }

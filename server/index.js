@@ -16,7 +16,8 @@ app.get('/auctions', (req, res) => {
   Promise.all([
     db.Auction.find({})
       .lean(true)
-      .limit(10)
+      .sort({'_id': -1})
+      // .limit(10)
       .exec(),
     db.Auction.find({})
       .select('itemId')
@@ -38,14 +39,16 @@ app.get('/auctions', (req, res) => {
 });
 
 app.post('/auctions', (req, res) => {
-  db.saveAuction(req.body);
+  console.log('type of req.body: ', typeof req.body);
+  console.log('req.body: ', req.body);
+  db.saveRefinedAuction(req.body);
   res.status(201).send();
 });
 
 app.post('/search', (req, res) => {
   console.log('\n\nreq.body is: \n', req.body);
   ebay.search(req.body)
-    .then(results => res.status(200).send(results))
+    .then(results => res.status(200).send(ebay.refineData(results)))
     .catch(err => {
       console.log('Error searching: ', err);
       res.status(200).send('Error searching: ', err);
