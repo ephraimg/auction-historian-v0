@@ -15,17 +15,18 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // $.ajax({
-    //   url: '/items', 
-    //   success: (data) => {
-    //     this.setState({
-    //       items: data
-    //     })
-    //   },
-    //   error: (err) => {
-    //     console.log('err', err);
-    //   }
-    // });
+    $.ajax({
+      url: '/auctions', 
+      success: (auction10andAll) => {
+        this.setState({
+          auctions: auction10andAll[0],
+          savedAuctions: auction10andAll[1]
+        })
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
   }
 
   handleSaveClick(auction) {
