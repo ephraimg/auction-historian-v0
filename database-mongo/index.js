@@ -4,7 +4,7 @@ var fs = require('fs');
 var Promise = require('bluebird');
 var request = require('request');
 var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGODB_URI);
 
 var db = mongoose.connection;
 
