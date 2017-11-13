@@ -20,7 +20,7 @@ const List = props => {
         You have {Object.keys(props.savedAuctions).length} saved auctions.
       </div>
 
-      <div>
+      <div className="wrapper">
         {props.auctions.map(auction => {
           return (<ListItem 
             key={auction.itemId}

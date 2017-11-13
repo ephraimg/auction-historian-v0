@@ -23,11 +23,11 @@ var ListItem = props => {
             style={savedStyle}> Saved!
         </div> 
         <div>Current price: {'$' + Number(props.auction.currentPrice).toFixed(2)}</div>
-        <div>Item ID: &nbsp;
+        <div className="auction-id">ebay ID: &nbsp;
         <a href={props.auction.viewItemURL}>
           {props.auction.itemId}
         </a></div>
-        <div className="auction-title">{props.auction.title} </div>
+        <div>{props.auction.title} </div>
       </div>
     </div>); 
   } else {

@@ -1,9 +1,39 @@
 body {
-  margin: 40px;
+/*  margin: 0 40px;
+*/  padding: 0 40px;
 }
 
 #app {
-  width: 550px;
+  margin-top: 0px;
+  width: 1125px;
+}
+
+.logo {
+  height: 75px;
+  position: relative;
+  top: 15px;
+  margin-right: 50px;
+}
+
+.app-title {
+  margin-top: 20px;
+  color: white; 
+  font-family: 'Helvetica Neue', sans-serif; 
+  font-size: 75px;
+  font-weight: bold; 
+  letter-spacing: 1px; 
+  line-height: 1;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000 
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 550px 550px;
+  grid-column-gap: 25px;
 }
 
 .tabs {
@@ -11,7 +41,7 @@ body {
 }
 
 .tab {
-  background-color: lightGreen;
+  /*background-color: lightGreen;*/
   width: 125px;
   text-align: center;
   border: 1px solid grey;
@@ -50,18 +80,17 @@ body {
   float: left;
 }
 
-.auction-title {
-  margin: 7px 5px 7px 0px;
+.auction-id {
+  margin: 5px 5px 5px 0px;
 }
 
 .search-button {
-  background-color: lightGreen;
   width: 175px;
   text-align: center;
   border: 1px solid black;
   border-radius: 3px;
   padding: 2px;
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 
 .save-button {
@@ -74,6 +103,8 @@ body {
   margin-bottom: 10px;
   float: right;
 }
+
+
 
 .cf:before, .cf:after {
     content: " ";

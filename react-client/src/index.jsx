@@ -77,7 +77,8 @@ class App extends React.Component {
   
   render () {
     return (<div>
-      <h1>Auction Historian</h1>
+      <div className="app-title"><img src="gavel.png" className="logo"/>auction historian</div>
+      <hr style={{margin: "40px 0 30px 0"}}/>
       <List auctions={this.state.auctions} 
             loadedAuctions={this.state.loadedAuctions}
             savedAuctions={this.state.savedAuctions}  
