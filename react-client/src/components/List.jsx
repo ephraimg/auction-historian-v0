@@ -7,9 +7,12 @@ const List = props => {
   return (<div>
 
       <div className="tabs cf" >
-        <div className="tab" 
-            onClick={props.getSavedAuctions}
-        >Show saved <br/> auctions</div>
+        <div>
+          <button className="tab" 
+              onClick={props.getSavedAuctions}
+              onMouseUp={(e)=>e.target.blur()}
+          >Show saved <br/> auctions</button>
+        </div>
         <div style={{float: "right"}}>
           <Search 
             updateDisplayedAuctions={props.updateDisplayedAuctions}

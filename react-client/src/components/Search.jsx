@@ -47,12 +47,15 @@ class Search extends React.Component {
           onChange={this.handleChange}>
         </input>
       </div>
-      <div style={{float: "right"}} 
-        className="search-button"
-        onClick={this.handleClick}
-      > 
-        Search ebay auctions</div>
-      </div>)
+      <div>
+        <button style={{float: "right"}} 
+          onMouseUp={(e)=>e.target.blur()}
+          className="search-button"
+          onClick={this.handleClick}
+        > 
+          Search ebay auctions</button>
+      </div>
+    </div>)
   }
 
 }

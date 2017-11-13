@@ -35,6 +35,26 @@ var Auction = mongoose.model('Auction', auctionSchema);
 //   console.log('Mongoose index error... ', error);
 // });
 
+
+
+
+///////////
+
+// var Image = new ImageSchema(
+//   { img: 
+//     { data: Buffer, contentType: String }
+//   }
+// );
+
+// var Image = mongoose.model('LocalGallery', ImageSchema);
+
+
+
+//////////////////
+
+
+
+
 var selectAll = function(callback) {
   Auction.find({}, function(err, items) {
     if(err) {
@@ -53,6 +73,16 @@ var saveRefinedAuction = auction => {
       var file = fs.createWriteStream(localImagePath);
       var readable = request(auction.galleryURL);
       var writeable = readable.pipe(file);
+
+
+//       var newImage = new Image();
+//       var dbWritable = readable.pipe(newImage.img.data);
+//       newImage.img.data = fs.readFileSync(req.files.userPhoto.path)
+//  newImage.img.contentType = ‘image/png’;
+//  newImage.save();
+// });
+
+
       return new Promise((resolve, reject) => {
         readable.on('end', resolve(() => auction));
         readable.on('error', reject(() => {

@@ -28,9 +28,12 @@ class ListItem extends React.Component {
           onError={this.loadEbayImage}
         />
         <div className="auction-info"> 
-          <div className="save-button" 
-              style={this.savedStyle}> Saved!
-          </div> 
+          <div>
+            <button className="save-button" 
+                onMouseUp={(e)=>e.target.blur()}
+                style={this.savedStyle}> Saved!
+            </button> 
+          </div>
           <div>Current price: {'$' + Number(this.props.auction.currentPrice).toFixed(2)}</div>
           <div className="auction-id">ebay ID: &nbsp;
           <a href={this.props.auction.viewItemURL}>
@@ -43,12 +46,15 @@ class ListItem extends React.Component {
       return (<div className="auction-item cf">
         <img className="auction-img" src={this.props.auction.galleryURL}/>
         <div className="auction-info">
-          <div className="save-button" 
-            style={this.unsavedStyle}
-            onClick={() => {
-                this.props.handleSaveClick(this.props.auction);
-              }
-            }> Save
+          <div>
+            <button className="save-button" 
+              onMouseUp={(e)=>e.target.blur()}
+              style={this.unsavedStyle}
+              onClick={() => {
+                  this.props.handleSaveClick(this.props.auction);
+                }
+              }> Save
+            </button>
           </div>
           <div>Current price: {'$' + Number(this.props.auction.currentPrice).toFixed(2)}</div>
           <div className="auction-id">ebay ID: &nbsp;
