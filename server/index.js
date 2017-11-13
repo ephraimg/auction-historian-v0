@@ -25,28 +25,27 @@ app.get('/auctions', (req, res) => {
       .exec()
   ])
   .then(results => {
-    console.log(`================>\n 
-      server index 27: got ${results.length} results from db 
-      \n<===============`);
+    console.log(`================> \
+      server index 27: got ${results[0].length} results from db \
+      <===============`);
     res.status(200).send(results);
   })
   .catch(err => {
-    console.log(`================>\n 
-      server index 31: error getting results from db 
-      \n<===============`);
+    console.log(`================> \ 
+      server index 31: error getting results from db \
+      <===============`);
     res.sendStatus(500);
   });
 });
 
 app.post('/auctions', (req, res) => {
-  console.log('type of req.body: ', typeof req.body);
-  console.log('req.body: ', req.body);
+  // console.log('req.body: ', req.body);
   db.saveRefinedAuction(req.body);
   res.status(201).send();
 });
 
 app.post('/search', (req, res) => {
-  console.log('\n\nreq.body is: \n', req.body);
+  // console.log('\n\nreq.body is: \n', req.body);
   ebay.search(req.body)
     .then(results => res.status(200).send(ebay.refineData(results)))
     .catch(err => {

@@ -26,8 +26,8 @@ var search = (query) => {
             console.log(`ebayHelpers 27: error searching.\n${err}`);
             reject(err);
           } else {
-            console.log(`ebayHelpers 30: request yielded body:\n${JSON.stringify(body)}`);
-            console.log(`ebayHelpers 30: request yielded res:\n${JSON.stringify(res)}`);    
+            // console.log(`ebayHelpers 30: request yielded body:\n${JSON.stringify(body)}`);
+            console.log(`ebayHelpers 30: ebay search request successful`);
             resolve(body);
           }
         });
@@ -37,7 +37,8 @@ var search = (query) => {
 
 var refineData = rawAuctions => {
     var refinedAuctions = [];
-    var auctionsToRefine = rawAuctions.findItemsAdvancedResponse !== undefined
+    // console.log(rawAuctions.findItemsAdvancedResponse[0].searchResult[0]);
+    var auctionsToRefine = rawAuctions.findItemsAdvancedResponse[0].searchResult[0] !== undefined
         ? rawAuctions.findItemsAdvancedResponse[0].searchResult[0].item
         : rawAuctions;
     // console.log(rawAuctions, '\n\n', rawAuctions.findItemsAdvancedResponse.item);
@@ -47,12 +48,15 @@ var refineData = rawAuctions => {
         var currentPrice = Number(ebayItem.sellingStatus[0].currentPrice[0]["__value__"]);
         var currencyId = ebayItem.sellingStatus[0].currentPrice[0]["@currencyId"]
         var endTime = new Date(ebayItem.listingInfo[0].endTime);
+        var galleryURL = ebayItem.galleryURL !== undefined 
+            ? ebayItem.galleryURL[0]
+            : './placeholder.png';
         var refinedAuction = {
           itemId: ebayItem.itemId[0],
           title: ebayItem.title[0],
           categoryId: ebayItem.primaryCategory[0].categoryId[0],
           categoryName: ebayItem.primaryCategory[0].categoryName[0],
-          galleryURL: ebayItem.galleryURL[0],
+          galleryURL: galleryURL,
           // localImage: '.\/' + ebayItem.itemId[0] + '.jpg',
           localImage: `./local-gallery/${ebayItem.itemId[0]}.jpg`,
           viewItemURL: ebayItem.viewItemURL[0],

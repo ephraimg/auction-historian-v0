@@ -22,7 +22,7 @@ const List = props => {
 
       <div className="wrapper">
         {props.auctions.map(auction => {
-          return (<ListItem 
+          return (<ListItem
             key={auction.itemId}
             isSaved={!!props.savedAuctions[auction.itemId]} 
             auction={auction}
